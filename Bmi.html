@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>BMI Calculator</h2>
+
+    <label for="weight">Weight (kg): </label>
+    <input type="number" id="weight" placeholder="Enter weight" step="0.1">
+    <br>
+
+    <label for="height">Height (m): </label>
+    <input type="number" id="height" placeholder="Enter height" step="0.01">
+    <br>
+
+    <button onclick="calculateBMI()">Calculate BMI</button>
+    <br>
+
+    <label for="result">BMI: </label>
+    <input type="text" id="result" disabled>
+    <br>
+
+    <p id="interpretation"></p>
+
+    <script>
+        function calculateBMI() {
+            var weight = parseFloat(document.getElementById('weight').value);
+            var height = parseFloat(document.getElementById('height').value);
+
+            if (!isNaN(weight) && !isNaN(height) && height > 0) {
+                var bmi = weight / (height * height);
+                document.getElementById('result').value = bmi.toFixed(2);
+
+                // Interpretation of BMI categories
+                var interpretation = '';
+                if (bmi < 18.5) {
+                    interpretation = 'Underweight';
+                } else if (bmi >= 18.5 && bmi < 25) {
+                    interpretation = 'Normal weight';
+                } else if (bmi >= 25 && bmi < 30) {
+                    interpretation = 'Overweight';
+                } else {
+                    interpretation = 'Obese';
+                }
+
+                document.getElementById('interpretation').innerText = 'Interpretation: ' + interpretation;
+            } else {
+                alert('Please enter valid weight and height.');
+            }
+        }
+    </script>
+
+</body>
+</html>
